@@ -1,4 +1,4 @@
-## Usage (Unfinished)
+## Usage
 ```
 #From the root of the repo:
 python mdtex.py doc_src/ .
