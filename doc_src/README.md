@@ -8,7 +8,7 @@ python mdtex.py doc_src/ .
 Quick test:
 
 $$
-\int_a^by[x]dx=\frac {x^2} 2|_a^b
+\int_a^by[x]dx=\frac {y^2} 2|_a^b=\frac 12 (b^2-a^2)
 $$
 
 Another demo:
