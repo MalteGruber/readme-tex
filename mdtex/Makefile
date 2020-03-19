@@ -1,5 +1,7 @@
 
 OUTNAME?="error"
+
+
 all: tex png move
 
 tex:
