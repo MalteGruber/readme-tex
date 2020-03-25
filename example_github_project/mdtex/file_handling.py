@@ -19,7 +19,7 @@ def file_append_to_path(path,filename):
 
 def test_path_validity(path):
     if not os.path.exists(path):
-        print("ERROR: Could not find the location <{}>".format(path))
+        print("ERROR: Could not find the location",path)
         exit(-1)
 
 def test_if_path_has_file(path,filename):

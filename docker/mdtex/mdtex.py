@@ -9,12 +9,17 @@ from file_handling import *
 
 import sys
 def on_error(msg):
-	logging.error(msg)
+	print("ERROR:",msg)
 	sys.exit(-1)
 	
 def run_latexifyerOLD(ltx,text):
+	
+	
+	
 	text=text.split("$$")
 	ret=""
+	
+	
 	for i in range(len(text)):
 	
 		if(i%2==0 ):
@@ -24,6 +29,11 @@ def run_latexifyerOLD(ltx,text):
 			ret+=ltx.get_latex_image_path()
 			
 	return ret
+
+
+
+
+
 	
 def run_latexifyer(ltx,text,generate_output=True):
 	
@@ -108,24 +118,33 @@ def run_latexifyer(ltx,text,generate_output=True):
 def get_abs_path_from_relative(rel):
 	return str(Path(rel).resolve())
 
+"""
 
+"""
 parser = argparse.ArgumentParser(description='Add latex to README files.')
 
-#parser.add_argument('source',  type=str, 
- #                   help='location of source file')
 
-#parser.add_argument('target',  type=str, 
- #                   help='location of target file')
+parser.add_argument('source',  type=str, 
+                    help='location of source file')
+
+parser.add_argument('target',  type=str, 
+                    help='location of target file')
 
 parser.add_argument('-p',dest="build_std_show",action='store_true', 
                     help='display latex compiler process output')
-
 parser.add_argument('-v', '--verbose', action='count', default=0,help='verbose mode -v or -vv')
+
+
+
 
 """
 Formating guide: https://docs.python.org/3/library/logging.html#logging.Formatter
 
 
+
+Level
+
+Numeric value
 CRITICAL	50
 ERROR	40
 WARNING	30
@@ -134,7 +153,9 @@ DEBUG	10
 NOTSET	0
 """
 
+
 #FORMAT = '%(filename)s:%(lineno)d [%(levelname)s]\t%(message)s'
+
 
 args = parser.parse_args()
 
@@ -143,37 +164,41 @@ none:0
 -v:1 Info
 -vv:2 
 """
+
 verbosity=args.verbose
+
 
 FORMAT = '%(filename)s:%(lineno)d [%(levelname)s]\t%(message)s'
 if verbosity==0:
-	FORMAT = '[%(levelname)s] %(message)s'
+	FORMAT = '%(message)s'
 	logging.basicConfig(level=logging.WARNING,format=FORMAT)
 elif verbosity==1:
 	logging.basicConfig(level=logging.INFO,format=FORMAT)
 elif verbosity==2:
 	logging.basicConfig(level=logging.DEBUG,format=FORMAT)
 	
-source_dir=""
-target_dir="doc"
-new_readme_file="README.md"
+
+
+source_dir=get_abs_path_from_relative(args.source)
+target_dir=get_abs_path_from_relative(args.target)
+
 
 logging.info("Reading from "+source_dir)
 logging.info("Writing to "+target_dir)
 
-#test_path_validity(source_dir)
-#"test_if_path_has_file(source_dir,"README.md")
+test_path_validity(source_dir)
+test_if_path_has_file(source_dir,"README.md")
 test_path_validity(target_dir)
 
-#eadme_loc=file_append_to_path(source_dir,)
+readme_loc=file_append_to_path(source_dir,"README.md")
 
-text=get_text_of_file("doc/README.md")
+text=get_text_of_file(readme_loc)
 
 ltx=LatexPngGenerator(args.build_std_show,target_dir)
 run_latexifyer(ltx,text,generate_output=False)
 new_readme_text=run_latexifyer(ltx,text)
 
-save_text_to_file(new_readme_file,new_readme_text)
+save_text_to_file(file_append_to_path(target_dir,"README.md"),new_readme_text)
 
 
 #OK
