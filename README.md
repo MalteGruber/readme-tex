@@ -6,9 +6,7 @@ This program parses LaTeX math in a `README.md` file and generates a new `README
 https://github.blog/2022-05-19-math-support-in-markdown/
 
 Native github LaTex:
-$$
-a^2+b^2=c^2
-$$
+$$a^2+b^2=c^2$$
 
 Readme-tex output:
 
