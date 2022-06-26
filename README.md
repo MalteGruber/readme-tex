@@ -2,6 +2,18 @@
 
 This program parses LaTeX math in a `README.md` file and generates a new `README.md` file with the math replaced by markdown image tags to the math. The math images are placed in a folder inside your repository, and when displayed on GitHub, the math will appear in the markdown. This program supports inline math and displayed math. The program supports user LaTeX macros and the use of LaTeX packages. This program uses the powerful texlive LaTeX compiler and a docker image with this program, and texlive is available on Docker Hub.
 
+**Github now natively supports LaTex. If you are writing documentation exclusively for Github, use it instead of this program. It looks way better!**
+https://github.blog/2022-05-19-math-support-in-markdown/
+
+Native github LaTex:
+$$
+a^2+b^2=c^2
+$$
+
+Readme-tex output:
+
+![ a^2+b^2=c^2](doc/teximg/tex_img_2_RVIFE.png)
+
 
 # Demo
 
